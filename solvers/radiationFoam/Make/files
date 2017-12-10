@@ -1,0 +1,3 @@
+radiationFoam.C
+
+EXE = ./radiationFoam

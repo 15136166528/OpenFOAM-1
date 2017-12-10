@@ -1,0 +1,5 @@
+wallTemperature.C
+wallTemperatureFunctionObject.C
+
+
+LIB = ./libwallTemperatureFunctionObjects
