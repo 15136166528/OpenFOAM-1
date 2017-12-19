@@ -44,11 +44,11 @@ namespace Foam
 
 void Foam::massFlowRate::writeFileHeader(const label i)
 {
-     writeHeader(file(), "wall temperature");
+     writeHeader(file(), "wall mass flow");
 
      writeCommented(file(), "Time");
      writeTabbed(file(), "patch");
-     writeTabbed(file(), "mass flow");
+     writeTabbed(file(), "mass_flow");
      file() << endl;
 }
 
@@ -122,13 +122,13 @@ void Foam::massFlowRate::execute()
         const fvMesh& mesh = refCast<const fvMesh>(obr_);
         
 		const surfaceScalarField::GeometricBoundaryField& patchPhi =
-			phi.boundaryField();        
+			phi.boundaryField();   
 
-        Info(log_)<< type() << " " << name_ << " output:" << nl;
-      
-      
+			
 		scalar netMassFlowRate = 0.0;
 		
+        Info(log_)<< type() << " " << name_ << " output:" << nl;
+
 		Info(log_)<< "\nMass Flow Rate [kg/s]" << endl;
 		
 		forAll(patchPhi, patchi)
@@ -160,8 +160,7 @@ void Foam::massFlowRate::execute()
 														  
 			}
 		}
-		
-		
+
 		if (Pstream::master())
 		{
 
@@ -171,10 +170,9 @@ void Foam::massFlowRate::execute()
 				<< token::TAB << "Net_Mass_Flow_Rate"
 				<< token::TAB << netMassFlowRate
 				<< endl;
-		}		
-		
-		
-		Info(log_)<< endl;        
+		}
+					
+		Info(log_)<< endl;
     }
 }
 
